@@ -1,66 +1,66 @@
-let ledCharacteristic = null;
+let myCharacteristic = null;
 
 window.addEventListener('load', () => {
-    console.log("Staring application");
+  console.log('Staring application')
 
-    let button = document.getElementById('connect');
-    button.addEventListener('click', connect);
+  let button = document.getElementById('connect')
+  button.addEventListener('click', connect)
 
-    let sendButton = document.getElementById('send');
-    sendButton.addEventListener('click', function(){
-        let view = new Uint8Array(3);
-        view[0] = 0x00;
-        view[1] = 0x00;
-        view[2] = 0xFF;
-        ledCharacteristic.writeValue(view);
-    });
-});
+  let stopButton = document.getElementById('stop')
+  stopButton.addEventListener('click', onStopButtonClick)
+})
 
-function handleCharacteristicValueChanged(event) {
-    console.log("event !!!");
-    var value = event.target.value;
-    console.log('Received ' + value);
+function handleCharacteristicValueChanged (event) {
+  console.log('event !!!')
+  var value = event.target.value
+  console.log('Received ' + value)
+}
+
+function onStopButtonClick() {
+  if (myCharacteristic) {
+    myCharacteristic.stopNotifications()
+      .then(_ => {
+        console.log('> Notifications stopped')
+        myCharacteristic.removeEventListener('characteristicvaluechanged',
+          handleNotifications)
+      })
+      .catch(error => {
+        console.log('Argh! ' + error)
+      })
   }
+}
 
-function connect(){
-    navigator.bluetooth.requestDevice({ 
-        filters: [{
-            namePrefix: 'Disco',
-        }],
-        // acceptAllDevices: true, 
-        optionalServices: ['ad11cf40-063f-11e5-be3e-0002a5d5c51b']
-    })
+function connect() {
+  navigator.bluetooth.requestDevice({
+    filters: [{
+      // namePrefix: 'Disco'
+      services: [
+        '00000000-0001-11e1-9ab4-0002a5d5c51b'
+      ]
+    }]
+    // acceptAllDevices: true,
+    // optionalServices: ['00000000-0001-11e1-9ab4-0002a5d5c51b']
+  })
     .then(device => {
-        // Human-readable name of the device.
-        console.log(device.name);
+      // Human-readable name of the device.
+      console.log(device.name)
 
-        // Attempts to connect to remote GATT Server.
-        return device.gatt.connect();
+      // Attempts to connect to remote GATT Server.
+      return device.gatt.connect()
     })
     .then(server => {
-        return server.getPrimaryService('ad11cf40-063f-11e5-be3e-0002a5d5c51b');
+      return server.getPrimaryService('00000000-0001-11e1-9ab4-0002a5d5c51b')
     })
     .then(service => {
-        return service.getCharacteristic('bf3fbd80-063f-11e5-9e69-0002a5d5c503');
+      return service.getCharacteristic('00000100-0001-11e1-ac36-0002a5d5c51b')
     })
-    .then(charcteristic => {
-        ledCharacteristic = charcteristic;
+    .then(characteristic => {
+      myCharacteristic = characteristic;
+      return myCharacteristic.startNotifications().then(_ => {
+        console.log('> Notifications started')
+        myCharacteristic.addEventListener('characteristicvaluechanged',
+          handleCharacteristicValueChanged)
+      })
     })
-    // .then(service => {
-    //     return service.getCharacteristic('bf3fbd80-063f-11e5-9e69-0002a5d5c501');
-    // })
-    // .then(characteristic => {
-    //     return characteristic.readValue();
-    // })
-    // .then(value => {
-    //     console.log(value.byteLength);
-    //     console.log('> Temperature: ' + value.getInt16());
-    // })
-    // .then(characteristic => {return characteristic.startNotifications()})
-    // .then(characteristic => {
-    //     characteristic.addEventListener('characteristicvaluechanged', handleCharacteristicValueChanged);
-    //     console.log('Notifications have been started.');
-    // })
-    
-    .catch(error => { console.log(error); });
+    .catch(error => { console.log(error) })
 }
