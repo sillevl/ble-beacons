@@ -1,18 +1,24 @@
 <template>
   <v-container>
-    <h1>Hello world</h1>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    <v-btn to="/user-profile" color="secondary">Next</v-btn>
+    <v-card-actions class="justify-center">
+      <v-btn to="/user-profile" color="secondary" large>
+        <v-icon left>add_circle</v-icon> 
+        Start new measurement
+      </v-btn>
+    </v-card-actions>
+
+    <h2>History</h2>
+    <History></History>
   </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import History from '@/components/History.vue'; // @ is an alias to /src
 
 @Component({
   components: {
-    HelloWorld,
+    History,
   },
 })
 export default class Home extends Vue {}

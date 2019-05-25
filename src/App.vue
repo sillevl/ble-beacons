@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <v-toolbar app>
+  <v-app dark>
+    <v-toolbar app color="primary" dark>
       <v-toolbar-title class="headline text-uppercase">
         <span>6Wolves</span>
         <span class="font-weight-light">Motion Classification</span>
