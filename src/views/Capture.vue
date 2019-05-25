@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
+  <v-container>
     <h1>Capture</h1>
     <v-btn to="/feedback">Next</v-btn>
-  </div>
+  </v-container>
 </template>

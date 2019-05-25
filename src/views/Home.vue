@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <v-container>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <v-btn to="/user-profile">Next</v-btn>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

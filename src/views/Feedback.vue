@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
+  <v-container>
     <h1>Feedback</h1>
     <v-btn to="/history">Next</v-btn>
-  </div>
+  </v-container>
 </template>
