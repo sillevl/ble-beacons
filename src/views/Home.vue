@@ -1,7 +1,8 @@
 <template>
   <v-container>
+    <h1>Hello world</h1>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-    <v-btn to="/user-profile">Next</v-btn>
+    <v-btn to="/user-profile" color="secondary">Next</v-btn>
   </v-container>
 </template>
 
