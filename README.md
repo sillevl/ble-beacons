@@ -32,3 +32,8 @@ Sample project using similar sensor/firmware: https://github.com/blueappio/qbtra
 
 Bluetooth API Ionic: https://ionicframework.com/docs/v3/native/ble/
 Cordova bluetooth plugin: https://github.com/don/cordova-plugin-ble-central
+
+
+## automatic reconnect
+
+https://googlechrome.github.io/samples/web-bluetooth/automatic-reconnect.html
