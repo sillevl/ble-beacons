@@ -15,6 +15,21 @@
     <v-content>
       <router-view/>
     </v-content>
+    <v-footer
+    height="auto"
+  >
+    <v-card class="white--text text-xs-center">
+      <v-card-text class="white--text">
+        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui.
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-text class="white--text">
+        &copy;2019 — <strong>6 Wolves</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
   </v-app>
 </template>
 

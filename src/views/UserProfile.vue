@@ -44,6 +44,7 @@
             step="1"
             ticks="always"
             tick-size="1"
+            label="fitness"
           ></v-slider>
       </v-flex>
     </v-form>
